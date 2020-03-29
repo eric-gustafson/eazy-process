@@ -150,7 +150,7 @@ stderr, and returns a lisp string."
 	   (format t "~a ~a~%" n buff)
 	   (cond
 	     ((> n 0)
-	      (loop :for i :from 0 :upto n :do
+	      (loop :for i :from 0 :below n :do
 		   (write-char (code-char (cffi:mem-aref buff :char i)) out)))
 	     (t
 	      (loop-finish)))
