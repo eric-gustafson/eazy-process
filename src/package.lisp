@@ -27,6 +27,7 @@
    #:fd
    #:+fdspecs-default+
    #:fd-as-pathname
+   #:fd-output-as-string
    #:fds
    #:pipe
    #:*rlimit-resources*
