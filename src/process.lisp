@@ -154,4 +154,24 @@ stderr, and returns a lisp string."
 	     (t
 	      (loop-finish)))
 	   )
-      (cffi:foreign-free buff))))
+      (cffi:foreign-free buff)
+      (iolib.syscalls:close dup-fd)
+      )))
+
+(defun fd-input-from-string (obj fd-num strbuff)
+  "(blocking)write to the fd of the process on fd-num"
+    (let* ((dup-fd (iolib.syscalls:open (format nil "~a" (eazy-process:fd-as-pathname obj fd-num))
+					iolib.syscalls:o-wronly))
+	   (n (length strbuff))
+	   (cbuff (cffi:foreign-alloc :char :count n)))
+      (loop
+	 :for idx :from 0
+	 :for c :across strbuff :do
+	   (setf (cffi:mem-aref cbuff :char idx) (char-code c)))
+      (let ((v (iolib.syscalls:write dup-fd cbuff n)))
+	;;(format t "wrote ~a of ~a~%" v n)
+	(cffi:foreign-free cbuff))
+      (iolib.syscalls:close dup-fd)
+      )
+    )
+	   

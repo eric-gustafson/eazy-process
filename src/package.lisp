@@ -28,6 +28,7 @@
    #:+fdspecs-default+
    #:fd-as-pathname
    #:fd-output-as-string
+   #:fd-input-from-string
    #:exec
    #:fds
    #:pipe
