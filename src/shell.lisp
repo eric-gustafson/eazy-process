@@ -154,8 +154,8 @@ exit-status)"
 	  wait-sig
 	((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
 	 (values
-	  (get-process-output-as-string p1)
-	  (get-process-error-as-string p1)
+	  (fd-output-as-string p1 1)
+	  (fd-output-as-string p1 2)
 	  exit-status
 	  cmd))
 	(otherwise
