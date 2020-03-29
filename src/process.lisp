@@ -151,7 +151,7 @@ stderr, and returns a lisp string."
 	   (cond
 	     ((> n 0)
 	      (loop :for i :from 0 :upto n :do
-		   (write-char (code-chr (cffi:mem-aref buff :char i)) out)))
+		   (write-char (code-char (cffi:mem-aref buff :char i)) out)))
 	     (t
 	      (loop-finish)))
 	   )
