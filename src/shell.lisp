@@ -139,17 +139,17 @@ exit-status)"
   (let* ((cmd (with-output-to-string (out)
 		(loop :for pre = nil :then " "
 		      :for str :in csexp :do
-		     (if pre (princ pre))
-		     (princ str)))) ;;serapeum:string-join csexp " "))
+		     (if pre (princ pre out))
+		     (princ str out))))
 	 (p1 (eazy-process:shell csexp ))
 	 )
     (when input
-      (error "todo - implemnt with low-level input")
-      #+nil(with-open-file (child-std-in (eazy-process:fd-as-pathname p1 0)
-				    :direction :output :if-exists :overwrite)
-	(princ input child-std-in)))
+      (fd-input-from-string p1 0 input))
+    ;(format t "closing input fd~%")
     (iolib.syscalls:close (eazy-process:fd p1 0))
+    ;(format t "waiting ...~%")
     (let ((wait-sig (eazy-process:wait p1)))
+      ;(format t "up!~%")
       (optima:match
 	  wait-sig
 	((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
