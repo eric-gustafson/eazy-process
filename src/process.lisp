@@ -124,3 +124,37 @@ it might read the entire characters of the file into the buffer as a side-effect
 We just advise you not to open the file more than once.
 "
   (pathname (uiop:ensure-pathname (format nil "/dev/fd/~a" (fd process fd)) :resolve-symlinks t)))
+
+
+;; The issue with the ccl-bin that I found, isn't with unix but rather
+;; seems to be how it's opening the low level file and trying to map
+;; LISP permissions to POSIX/Unix permisssions.  There are a lot of
+;; lisps, and mapping :if-not-exist. :if-exists ... to O_CREAT, O_RDWR
+;; ... sounds hard, so this attempt is to keeps things 'UNIXY' at the
+;; lowest levels and to turn things into lisp objects as fast as
+;; possible.
+(defun fd-output-as-string (obj fd-num)
+  "(blocking)Reads all of the output from the file descriptor; like stdout and
+stderr, and returns a lisp string."
+  (let* ((dup-fd (iolib.syscalls:open (format nil "~a" (eazy-process:fd-as-pathname obj fd-num))
+				      iolib.syscalls:o-rdonly))
+	 (n 0)
+	 (blksz 1024)
+	 (buff (cffi:foreign-alloc :char :initial-element blksz))
+	 (results '()))
+    (with-output-to-string (out)
+      (loop :do
+	 ;; I think syscalls:read handles restarts, we don't need
+	 ;; to worry about eintr and the like
+	   (setf n (iolib.syscalls:read dup-fd buff blksz))
+	   (format t "~a ~a~%" n buff)
+	   (cond
+	     ((> n 0)
+	      (loop :for i :from 0 :upto n :do
+		   (write-char (code-chr (cffi:mem-aref buff :char i)) out)))
+	     (t
+	      (loop-finish)))
+	   )
+      (cffi:foreign-free buff)
+      )
+    ))
