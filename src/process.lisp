@@ -140,14 +140,13 @@ stderr, and returns a lisp string."
 				      iolib.syscalls:o-rdonly))
 	 (n 0)
 	 (blksz 1024)
-	 (buff (cffi:foreign-alloc :char :initial-element blksz))
+	 (buff (cffi:foreign-alloc :char :count blksz))
 	 (results '()))
     (with-output-to-string (out)
       (loop :do
 	 ;; I think syscalls:read handles restarts, we don't need
 	 ;; to worry about eintr and the like
 	   (setf n (iolib.syscalls:read dup-fd buff blksz))
-	   (format t "~a ~a~%" n buff)
 	   (cond
 	     ((> n 0)
 	      (loop :for i :from 0 :below n :do
@@ -155,6 +154,4 @@ stderr, and returns a lisp string."
 	     (t
 	      (loop-finish)))
 	   )
-      (cffi:foreign-free buff)
-      )
-    ))
+      (cffi:foreign-free buff))))
