@@ -130,3 +130,35 @@ On error during system call in the parent process, iolib.syscalls:syscall-error 
 In the child process, the system call failure result in error status 203.
 FIXME: this might not be good.
 ")
+
+(defun exec (csexp &key input)
+  "runs cmd, which is a sequence of strings using the eazy-process
+shell function.  This returns the values (output-str error-str
+exit-status)"
+  (declare (type list csexp))
+  (let* ((cmd (with-output-to-string (out)
+		(loop :for pre = nil :then " "
+		      :for str :in csexp :do
+		     (if pre (princ pre))
+		     (princ str)))) ;;serapeum:string-join csexp " "))
+	 (p1 (eazy-process:shell csexp ))
+	 )
+    (when input
+      (error "todo - implemnt with low-level input")
+      #+nil(with-open-file (child-std-in (eazy-process:fd-as-pathname p1 0)
+				    :direction :output :if-exists :overwrite)
+	(princ input child-std-in)))
+    (iolib.syscalls:close (eazy-process:fd p1 0))
+    (let ((wait-sig (eazy-process:wait p1)))
+      (optima:match
+	  wait-sig
+	((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
+	 (values
+	  (get-process-output-as-string p1)
+	  (get-process-error-as-string p1)
+	  exit-status
+	  cmd))
+	(otherwise
+	 (error "exec returned an unexpected value ~a~&" wait-sig))))
+    )
+  )
