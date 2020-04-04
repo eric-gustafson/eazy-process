@@ -131,27 +131,32 @@ In the child process, the system call failure result in error status 203.
 FIXME: this might not be good.
 ")
 
+(defparameter *debug-exec* t)
+
 (defun exec (csexp &key input)
   "runs cmd, which is a sequence of strings using the eazy-process
 shell function.  This returns the values (output-str error-str
 exit-status)"
   (declare (type list csexp))
-  (let* ((cmd (with-output-to-string (out)
+  (let ((cmd (with-output-to-string (out)
 		(loop :for pre = nil :then " "
 		      :for str :in csexp :do
 		     (if pre (princ pre out))
-		     (princ str out))))
-	 (p1 (eazy-process:shell csexp ))
-	 )
-    (when input
-      (fd-input-from-string p1 0 input))
-    ;(format t "closing input fd~%")
-    (iolib.syscalls:close (eazy-process:fd p1 0))
-    ;(format t "waiting ...~%")
-    (let ((wait-sig (eazy-process:wait p1)))
-      ;(format t "up!~%")
-      (optima:match
-	  wait-sig
+		     (princ str out)))))
+    (when *debug-exec* (format *error-output* "~a:~a" csexp cmd))
+    (let ((p1 (eazy-process:shell csexp)))
+      (when input
+	(fd-input-from-string p1 0 input))
+      (when *debug-exec*
+	(format *error-output* "closing input fd~%"))
+      (iolib.syscalls:close (eazy-process:fd p1 0))
+      (when *debug-exec*
+	(format *error-output* "waiting ...~%"))
+      (let ((wait-sig (eazy-process:wait p1)))
+	(when *debug-exec*
+	  (format *error-output* "up!~%"))
+	(optima:match
+	    wait-sig
 	((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
 	 (values
 	  (fd-output-as-string p1 1)
@@ -160,6 +165,7 @@ exit-status)"
 	  cmd))
 	(otherwise
 	 (error "exec returned an unexpected value ~a~&" wait-sig))))
+      )
     )
   )
 
