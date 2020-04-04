@@ -142,21 +142,23 @@ stderr, and returns a lisp string."
 	 (blksz 1024)
 	 (buff (cffi:foreign-alloc :char :count blksz))
 	 (results '()))
-    (with-output-to-string (out)
-      (loop :do
-	 ;; I think syscalls:read handles restarts, we don't need
-	 ;; to worry about eintr and the like
-	   (setf n (iolib.syscalls:read dup-fd buff blksz))
-	   (cond
-	     ((> n 0)
-	      (loop :for i :from 0 :below n :do
-		   (write-char (code-char (cffi:mem-aref buff :char i)) out)))
-	     (t
-	      (loop-finish)))
-	   )
-      (cffi:foreign-free buff)
-      (iolib.syscalls:close dup-fd)
-      )))
+    (unwind-protect
+	 (with-output-to-string (out)
+	   (loop :do
+	      ;; I think syscalls:read handles restarts, we don't need
+	      ;; to worry about eintr and the like
+		(setf n (iolib.syscalls:read dup-fd buff blksz))
+		(cond
+		  ((> n 0)
+		   (loop :for i :from 0 :below n :do
+			(write-char (code-char (cffi:mem-aref buff :char i)) out)))
+		  (t
+		   (loop-finish)))
+		))
+      (progn
+	(cffi:foreign-free buff)
+	(iolib.syscalls:close dup-fd)
+	))))
 
 (defun fd-input-from-string (obj fd-num strbuff)
   "(blocking)write to the fd of the process on fd-num"
@@ -164,14 +166,16 @@ stderr, and returns a lisp string."
 					iolib.syscalls:o-wronly))
 	   (n (length strbuff))
 	   (cbuff (cffi:foreign-alloc :char :count n)))
-      (loop
-	 :for idx :from 0
-	 :for c :across strbuff :do
-	   (setf (cffi:mem-aref cbuff :char idx) (char-code c)))
-      (let ((v (iolib.syscalls:write dup-fd cbuff n)))
-	;;(format t "wrote ~a of ~a~%" v n)
-	(cffi:foreign-free cbuff))
-      (iolib.syscalls:close dup-fd)
-      )
+      (unwind-protect
+	   (progn
+	     (loop
+	      :for idx :from 0
+	      :for c :across strbuff :do
+		(setf (cffi:mem-aref cbuff :char idx) (char-code c)))
+	     (iolib.syscalls:write dup-fd cbuff n))
+	(progn
+	  (cffi:foreign-free cbuff)
+	  (iolib.syscalls:close dup-fd))
+	))
     )
 	   
