@@ -29,6 +29,7 @@
    #:fd-as-pathname
    #:fd-output-as-string
    #:fd-input-from-string
+   #:is-run ;; inferior-shell string-command. 
    #:exec
    #:fds
    #:pipe

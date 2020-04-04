@@ -162,3 +162,9 @@ exit-status)"
 	 (error "exec returned an unexpected value ~a~&" wait-sig))))
     )
   )
+
+(defun is-run (str)
+  "inferior shell run: takes a string command, use this to make
+porting a little easier.  This is not meant to be a replacement for
+inferior shell, it will just help in the conversion."
+  (exec (ppcre:split "\\s+" str)))
