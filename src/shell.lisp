@@ -131,7 +131,7 @@ In the child process, the system call failure result in error status 203.
 FIXME: this might not be good.
 ")
 
-(defparameter *debug-exec* t)
+(defparameter *debug-exec* nil)
 
 (defun exec (csexp &key input)
   "runs cmd, which is a sequence of strings using the eazy-process
