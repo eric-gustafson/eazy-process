@@ -1,0 +1,169 @@
+<!DOCTYPE html> <html lang="EN"> <head> <meta charset="utf-8"> <title>Eazy Process</title> <style>html body{margin:0 auto 0 auto;padding:20px;max-width:1024px;font-family:sans-serif;font-size:14pt;overflow-y:scroll;}html body a{text-decoration:none;}html body a[href]{color:#0055AA;}html body a[href]:hover{color:#0088EE;}html body pre{background:#FAFAFA;border:1px solid #DDDDDD;padding:0.75em;overflow-x:auto;}html body pre >code a[href]{color:#223388;}article.project h1{font-size:1.7em;}article.project h1,article.project h2,article.project h3,article.project h4,article.project h5,article.project h6{margin:0.2em 0 0.1em 0;text-indent:1em;}article.project >header{text-align:center;}article.project >header img.logo{display:block;margin:auto;max-height:170px;}article.project >header h1{display:inline-block;text-indent:0;font-size:2.5em;}article.project >header .version{vertical-align:bottom;}article.project >header .languages{margin-top:-0.5em;text-transform:capitalize;}article.project >header .description{margin:0;}article.project >header .pages{margin-top:0.5em;font-size:1.2em;text-transform:capitalize;}article.project >header .pages a{display:inline-block;padding:0 0.2em;}article.project >section{margin:1em 0 1em 0;}article.project #index >ul{list-style:none;margin:0;padding:0;}article.project .row label{display:inline-block;min-width:8em;}article.project #system .row{display:flex;}article.project #system #dependencies{display:inline;margin:0;padding:0;}article.project #system #dependencies li{display:inline;padding:0 0.2em;}article.definition{margin:1em 0 0 0;}article.definition >header h1,article.definition >header h2,article.definition >header h3,article.definition >header h4,article.definition >header h5,article.definition >header h6{text-indent:0;display:inline-block;}article.definition >header ul{display:inline-block;list-style:none;margin:0;padding:0;}article.definition >header ul li{display:inline-block;padding:0 0.2em 0 0;}article.definition >header .visibility{display:none;}article.definition >header .visibility,article.definition >header .type{text-transform:lowercase;}article.definition >header .source-link{visibility:hidden;float:right;}article.definition >header .source-link:after{visibility:visible;content:"[SRC]";}article.definition .docstring{margin:0 0 0 1em;}article.definition .docstring pre{font-size:0.8em;white-space:pre-wrap;}.definition.package >header ul.nicknames{display:inline-block;list-style:none;margin:0;padding:0 0 0 1em;}.definition.package >header ul.nicknames li{display:inline;}.definition.package >header ul.nicknames:before{content:"(";}.definition.package >header ul.nicknames:after{content:")";}.definition.package ul.definitions{margin:0;list-style:none;padding:0 0 0 0.5em;}.definition.callable >header .name:before,.definition.type >header .name:before{content:"(";font-weight:normal;}.definition.callable >header .arguments:after,.definition.type >header .arguments:after{content:")";}.definition.callable >header .arguments .arguments:before,.definition.type >header .arguments .arguments:before{content:"(";}.definition.callable >header .arguments .argument,.definition.type >header .arguments .argument{padding:0;}.definition.callable >header .arguments .argument.lambda-list-keyword,.definition.type >header .arguments .argument.lambda-list-keyword{color:#991155;}.definition li>mark{background:none;border-left:0.3em solid #0088EE;padding-left:0.3em;display:block;} </style> </head> <body> <article class="project"> <header>  <h1>eazy process</h1>  <span class="version">0.1</span>  <nav class="languages">  <a href="index.html">English</a>  </nav>  <p class="description">Yet Another Portable Library for Process Handling / Subshell Invokation</p>  <nav class="pages">  <a href="index.html">eazy process</a>  </nav> </header> <section id="documentation"> </section>   <section id="system"> <h2>System Information</h2>  <div class="row"> <label for="version">Version:</label> <a id="version">0.1</a> </div>   <div class="row"> <label for="dependencies">Dependencies:</label> <ul id="dependencies"><li><a class="external">iterate</a></li><li><a class="external">alexandria</a></li><li><a class="external">cffi</a></li><li><a class="external">optima</a></li><li><a class="external">optima.ppcre</a></li><li><a class="external">iolib/syscalls</a></li><li><a class="external">trivial-garbage</a></li><li><a class="external">cl-ppcre</a></li><li><a class="external">cl-rlimit</a></li></ul> </div>   <div class="row"> <label for="author">Author:</label> <a id="author">Masataro Asai</a> </div>   <div class="row"> <label for="license">License:</label> <a id="license" href="https://tldrlegal.com/search?q=MIT">MIT</a> </div>   </section>    <section id="index"> <h2>Definition Index</h2> <ul> <li> <article class="definition package" id="PACKAGE EAZY-PROCESS"> <header> <h3> <a href="#PACKAGE%20EAZY-PROCESS">EAZY-PROCESS</a> </h3> <ul class="nicknames"></ul>  </header> <div class="docstring"><i>No documentation provided.</i></div> <ul class="definitions"> <li> <article class="definition symbol-macro" id="VARIABLE EAZY-PROCESS:*BOURNE-COMPATIBLE-SHELL*"> <header> <span class="visibility">EXTERNAL</span> <span class="type">SYMBOL-MACRO</span> <h4 class="name"> <a href="#VARIABLE%20EAZY-PROCESS%3A%2ABOURNE-COMPATIBLE-SHELL%2A">*BOURNE-COMPATIBLE-SHELL*</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/compat/trivial-shell.lisp#46:0">Source</a>  </header> <div class="docstring"><i>No documentation provided.</i></div> </article> </li>  <li> <article class="definition special-variable" id="VARIABLE EAZY-PROCESS:*INTERPRETER*"> <header> <span class="visibility">EXTERNAL</span> <span class="type">SPECIAL-VARIABLE</span> <h4 class="name"> <a href="#VARIABLE%20EAZY-PROCESS%3A%2AINTERPRETER%2A">*INTERPRETER*</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/compat/trivial-shell.lisp#30:0">Source</a>  </header> <div class="docstring"><pre>Command line string which is invoked in order to run the subshell. Default value is &quot;sh -c&quot;.
+The value is then followed by the command specified in shell-command, e.g. ,
+when command = 'ls -la', the running command is &quot;sh -c 'ls -la'&quot;.
+It provides the ability to call the interpreters like perl/AWK easily.
+
+The name/path of the interpreter must be separated by spaces from the options like '-c'.
+Do not use complex things like --- LANG=C sh . The first word is always considered the pathname.
+If you want to do complicated stuff, then do it inside the interpreter.
+
+The process is forked, then the child process calls execvp with the name of
+the interpreter. (This is defined in function `eazy-process:shell'.) The
+actual pathname of the intepreter can be resolved using PATH environment
+variable.
+</pre></div> </article> </li>  <li> <article class="definition special-variable" id="VARIABLE EAZY-PROCESS:*RLIMIT-RESOURCES*"> <header> <span class="visibility">EXTERNAL</span> <span class="type">SPECIAL-VARIABLE</span> <h4 class="name"> <a href="#VARIABLE%20EAZY-PROCESS%3A%2ARLIMIT-RESOURCES%2A">*RLIMIT-RESOURCES*</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/specials.lisp#26:0">Source</a>  </header> <div class="docstring"><pre>A vector of rlimit resource value, where the index suggests +rlimit-XXX+, which is an integer (usually below 16)
+This value does not affect the lisp process itself; The effect is applied to the child process only.
+Rather than modifying this variable directly, use `with-rlimit' instead.</pre></div> </article> </li>  <li> <article class="definition special-variable" id="VARIABLE EAZY-PROCESS:+FDSPECS-DEFAULT+"> <header> <span class="visibility">EXTERNAL</span> <span class="type">SPECIAL-VARIABLE</span> <h4 class="name"> <a href="#VARIABLE%20EAZY-PROCESS%3A%2BFDSPECS-DEFAULT%2B">+FDSPECS-DEFAULT+</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/specials.lisp#11:0">Source</a>  </header> <div class="docstring"><i>No documentation provided.</i></div> </article> </li>  <li> <article class="definition class" id="CLASS EAZY-PROCESS:PROCESS"> <header> <span class="visibility">EXTERNAL</span> <span class="type">CLASS</span> <h4 class="name"> <a href="#CLASS%20EAZY-PROCESS%3APROCESS">PROCESS</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#4:0">Source</a>  </header> <div class="docstring"><pre>A class representing a process.</pre></div> </article> </li>  <li> <article class="definition structure" id="STRUCTURE EAZY-PROCESS:PIPE"> <header> <span class="visibility">EXTERNAL</span> <span class="type">STRUCTURE</span> <h4 class="name"> <a href="#STRUCTURE%20EAZY-PROCESS%3APIPE">PIPE</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/pipe.lisp#4:0">Source</a>  </header> <div class="docstring"><i>No documentation provided.</i></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:CLOSE-PIPE"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3ACLOSE-PIPE">CLOSE-PIPE</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">PIPE</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/pipe.lisp#12:0">Source</a>  </header> <div class="docstring"><i>No documentation provided.</i></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:ENVIRONMENT"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AENVIRONMENT">ENVIRONMENT</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/environ.lisp#5:0">Source</a>  </header> <div class="docstring"><i>No documentation provided.</i></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:EXEC"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AEXEC">EXEC</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">CSEXP</li>    <li class="argument lambda-list-keyword">&amp;KEY</li>    <li class="argument">INPUT</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/shell.lisp#136:0">Source</a>  </header> <div class="docstring"><pre>runs cmd, which is a sequence of strings using the eazy-process
+shell function.  This returns the values (output-str error-str
+exit-status)</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:FD"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AFD">FD</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">PROCESS</li>    <li class="argument">N</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#104:0">Source</a>  </header> <div class="docstring"><pre>Returns the file descriptor of the lisp process.
+The returned fd is connected to the n-th fd of the child process through a pipe.
+Example:
+
+ (fd P 1) ; --&gt; 5 
+
+This means that the 5'th fd of the lisp process is connected to the 1st fd of the process P.</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:FD-AS-PATHNAME"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AFD-AS-PATHNAME">FD-AS-PATHNAME</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">PROCESS</li>    <li class="argument">FD</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#114:0">Source</a>  </header> <div class="docstring"><pre>Return the pathname for each file descriptor.
+Lisp can read/write to each fd by opening this file.
+
+Since the buffer size of file-stream is implementation-dependent, and the
+call to cl:read might cache a considerable amount of characters from the
+file, we are not able to ensure that the same file can be opened more than once.
+
+Even if you just cl:open the file and just cl:read-char the stream,
+it might read the entire characters of the file into the buffer as a side-effect.
+We just advise you not to open the file more than once.
+</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:FD-INPUT-FROM-STRING"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AFD-INPUT-FROM-STRING">FD-INPUT-FROM-STRING</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">OBJ</li>    <li class="argument">FD-NUM</li>    <li class="argument">STRBUFF</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#166:0">Source</a>  </header> <div class="docstring"><pre>(blocking)write to the fd of the process on fd-num</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:FD-OUTPUT-AS-STRING"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AFD-OUTPUT-AS-STRING">FD-OUTPUT-AS-STRING</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">OBJ</li>    <li class="argument">FD-NUM</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#136:0">Source</a>  </header> <div class="docstring"><pre>(blocking)Reads all of the output from the file descriptor; like stdout and
+stderr, and returns a lisp string.</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:FDS"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AFDS">FDS</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">PROCESS</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#14:0">Source</a>  </header> <div class="docstring"><pre>Returns an fresh array of fds available from lisp process.</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:FINALIZE-PROCESS"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AFINALIZE-PROCESS">FINALIZE-PROCESS</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">PROCESS</li>    <li class="argument lambda-list-keyword">&amp;OPTIONAL</li>    <li class="argument">SIG</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#54:0">Source</a>  </header> <div class="docstring"><pre>Waitpid the process. If the process is alive, kill it with SIG first,
+then with SIGKILL.</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:GETPID"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AGETPID">GETPID</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  </header> <div class="docstring"><pre>Returns the process id of the current process</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:IS-RUN"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AIS-RUN">IS-RUN</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">STR</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/shell.lisp#173:0">Source</a>  </header> <div class="docstring"><pre>inferior shell run: takes a string command, use this to make
+porting a little easier.  This is not meant to be a replacement for
+inferior shell, it will just help in the conversion.</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:PIPE"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3APIPE">PIPE</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments"></ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/pipe.lisp#8:0">Source</a>  </header> <div class="docstring"><i>No documentation provided.</i></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:SHELL"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3ASHELL">SHELL</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">ARGV</li>    <li class="argument lambda-list-keyword">&amp;OPTIONAL</li>    <li class="argument">FDSPECS</li>    <li class="argument">ENVIRONMENTS</li>    <li class="argument">SEARCH</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/shell.lisp#11:0">Source</a>  </header> <div class="docstring"><pre>Asynchronously execute `argv' using fork(2) and `execve'
+ family of system calls, returns a process structure object.
+
+ARGV is a sequence of strings. Each string is converted to null-terminated
+C strings char* ARGV and passed to execvp.  The first element is also
+passed to execvp as the pathname of the executable.
+
+FDSPECS is a sequence specifying how the child process should handle its output.
+For the documentation of fd-specifier see `+fdspecs-default+'.
+Example: (:in :out :out) , (5 :out 8)
+
+Each element in FDSPECS corresponds to each file descriptor of the child process.
+
+When an i-th element of FDSPECS is a symbol, then a new pipe(2) is created for each i.
+The i-th fd of the child process p1 is associated with the correct end of the new pipe,
+the other end of the pipe is readable/writable from lisp from the process interface.
+ (see the documentation of class PROCESS.)
+
+When an i-th element of FDSPECS is an integer j,
+then it should be the lisp end of a pipe connected to some other child process p2.
+ (not the normal fd of the lisp process, like 0,1,2)
+The i-th fd of p1 is connected to this pipe,
+then p1 and p2 can exchange the data each other.
+When this happens, lisp process should not read from this pipe
+ (or the data will not be sent to the destination of the pipe).
+For that purpose, add a layer like `tee'.
+
+When ENVIRONMENT is specified, it is passed to execve/execvpe.
+It should be a list of strings (&quot;NAME1=VALUE1&quot; &quot;NAME2=VALUE2&quot;)
+or an alist ((&quot;NAME1&quot; . &quot;VALUE1&quot;) ...).
+When SEARCH is t, it uses execvp/execvpe. (==executable is searched through PATH)
+
+On error during system call in the parent process, iolib.syscalls:syscall-error is signalled.
+In the child process, the system call failure result in error status 203.
+FIXME: this might not be good.
+</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:SHELL-COMMAND"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3ASHELL-COMMAND">SHELL-COMMAND</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">COMMAND</li>    <li class="argument lambda-list-keyword">&amp;KEY</li>    <li class="argument">INPUT</li>    <li class="argument">RESULT-TYPE</li>    <li class="argument">EXTERNAL-FORMAT</li>    <li class="argument">VERBOSE</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/compat/trivial-shell.lisp#74:0">Source</a>  </header> <div class="docstring"><pre>simple interface compatible to trivial-shell @
+https://github.com/gwkkwg/trivial-shell.git.
+
+returns (values output error-output exit-status).
+The input is read from the :input key argument.
+
+Additional functionality:
+
+:external-format --- specifies the decoding of the output.
+</pre></div> </article> </li>  <li> <article class="definition function callable" id="FUNCTION EAZY-PROCESS:WAIT"> <header> <span class="visibility">EXTERNAL</span> <span class="type">FUNCTION</span> <h4 class="name"> <a href="#FUNCTION%20EAZY-PROCESS%3AWAIT">WAIT</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">PROCESS</li>    <li class="argument lambda-list-keyword">&amp;OPTIONAL</li>    <li class="argument">OPTION</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/process.lisp#62:0">Source</a>  </header> <div class="docstring"><pre>option is one of :nohang, :untraced, :continued.
+Returns a value of the following signature:
+
+ (list (boolean ifexited)
+       (integer exitstatus)
+       (boolean ifsignalled)
+       (integer termsig)
+       (boolean coredump)
+       (boolean ifstopped)
+       (integer stopsig)
+       (boolean ifcontinued)
+       (integer status)).
+
+When the value is inappropriate as defined in man wait(2),
+some integer values may return NIL.
+When :nohang is specified but no child has changed its state, 
+then it returns NIL instead.
+`wait(0)', i.e. wait for any children, is not available.
+</pre></div> </article> </li>  <li> <article class="definition generic-function callable" id="GENERIC-FUNCTION EAZY-PROCESS:PID"> <header> <span class="visibility">EXTERNAL</span> <span class="type">GENERIC-FUNCTION</span> <h4 class="name"> <a href="#GENERIC-FUNCTION%20EAZY-PROCESS%3APID">PID</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">OBJECT</li>  </ul>  </header> <div class="docstring"><i>No documentation provided.</i></div> </article> </li>  <li> <article class="definition macro callable" id="MACRO-FUNCTION EAZY-PROCESS:WITH-PROCESS"> <header> <span class="visibility">EXTERNAL</span> <span class="type">MACRO</span> <h4 class="name"> <a href="#MACRO-FUNCTION%20EAZY-PROCESS%3AWITH-PROCESS">WITH-PROCESS</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <ul class="arguments"> <li class="argument">PROCESS</li>  <li class="argument">ARGV</li>  <li class="argument lambda-list-keyword">&amp;OPTIONAL</li>  <li class="argument">FDSPECS</li>  <li class="argument">ENVIRONMENT</li>  <li class="argument">SEARCH</li> </ul>    <li class="argument lambda-list-keyword">&amp;BODY</li>    <li class="argument">BODY</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/macros.lisp#5:0">Source</a>  </header> <div class="docstring"><pre>Spawn a process, bind the process to PROCESS,
+execute the body and finalize (= kill and wait w/ nohang) the process.
+BODY works as an implicit progn, and the return value is that of the progn.
+
+It does not synchronously wait the process. Therefore, it is the user's
+responsibility to inhibit the early termination of the process.
+The aim of finalization is to release the resources of the process e.g. file descriptor and pipes.
+
+ Example:
+
+ (with-open-process (p (&quot;sleep&quot; &quot;10&quot;))
+    (print :waiting)
+    (wait p))
+
+</pre></div> </article> </li>  <li> <article class="definition macro callable" id="MACRO-FUNCTION EAZY-PROCESS:WITH-RLIMIT"> <header> <span class="visibility">EXTERNAL</span> <span class="type">MACRO</span> <h4 class="name"> <a href="#MACRO-FUNCTION%20EAZY-PROCESS%3AWITH-RLIMIT">WITH-RLIMIT</a> </h4> <ul class="qualifiers"></ul> <ul class="arguments">  <li class="argument">PAIRS</li>    <li class="argument lambda-list-keyword">&amp;BODY</li>    <li class="argument">BODY</li>  </ul>  <a class="source-link" href="file:///home/egustafs/secapp/eazy-process/src/resources.lisp#4:0">Source</a>  </header> <div class="docstring"><pre>Append/overwrite the current rlimit resouce limitation.
+This does not affect the lisp process itself.
+Only the spawned child process will be affected.</pre></div> </article> </li> </ul> </article> </li> </ul> </section>  </article> <script>window.addEventListener("DOMContentLoaded", function(){
+    var unmarkElement = function(el){
+        if(el.tagName === "mark" || el.tagName === "MARK"){
+            [].forEach.call(el.childNodes, function(child){
+                el.parentNode.insertBefore(child, el);
+            });
+            el.parentNode.removeChild(el);
+        }else if(el.parentNode.tagName === "mark"){
+            return unmarkElement(el.parentNode);
+        }
+        return null;
+    }
+
+    var unmarkAll = function(root){
+        root = root || document;
+        [].forEach.call(root.querySelectorAll("mark"), unmarkElement);
+    }
+    
+    var markElement = function(el){
+        if(el.parentNode.tagName === "mark" || el.parentNode.tagName === "MARK"){
+            return el.parentNode;
+        } else {
+            unmarkAll();
+            var marked = document.createElement("mark");
+            el.parentNode.insertBefore(marked, el);
+            marked.appendChild(el);
+            return marked;
+        }
+    }
+
+    var markFragmented = function(){
+        if(window.location.hash){
+            var el = document.getElementById(decodeURIComponent(window.location.hash.substr(1)));
+            if(el) markElement(el);
+        }
+    }
+
+    var registerXrefLink = function(link){
+        var el = document.getElementById(decodeURIComponent(link.getAttribute("href").substr(1)));
+        if(el){
+            link.addEventListener("click", function(){
+                markElement(el);
+            });
+        }
+    }
+
+    var registerXrefLinks = function(root){
+        root = root || document;
+        [].forEach.call(root.querySelectorAll("a.xref"), registerXrefLink);
+    }
+
+    markFragmented();
+    registerXrefLinks();
+}); </script> </body> </html> 
