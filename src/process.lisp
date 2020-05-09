@@ -157,10 +157,7 @@ stderr, and returns a lisp string."
 		))
       (progn
 	(cffi:foreign-free buff)
-	(handler-case	  
-	    (iolib.syscalls:close dup-fd)
-	  (isys:syscall-error (c)
-	    (format *error-output* "fd-output-as-string:close error ~a~&" c)))
+	(%close-fd-safely dup-fd)	
 	))))
 
 (defun fd-input-from-string (obj fd-num strbuff)
@@ -178,10 +175,8 @@ stderr, and returns a lisp string."
 	     (iolib.syscalls:write dup-fd cbuff n))
 	(progn
 	  (cffi:foreign-free cbuff)
-	  (handler-case	  
-	      (iolib.syscalls:close dup-fd)
-	    (isys:syscall-error (c)
-	      (format *error-output* "fd-input-from-string:close error ~a~&" c))))
+	  (%close-fd-safely dup-fd)		  
+	  )
 	))
     )
 	   
