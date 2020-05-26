@@ -134,7 +134,7 @@ FIXME: this might not be good.
 (defparameter *debug-exec* nil)
 
 (defun exec (csexp &key input)
-  "runs cmd, which is a sequence of strings using the eazy-process
+  "runs a unix cmd (csexp), which is a sequence of strings using the eazy-process
 shell function.  This returns the values (output-str error-str
 exit-status)"
   (declare (type list csexp))
@@ -164,11 +164,12 @@ exit-status)"
 	  (fd-output-as-string p1 2)
 	  exit-status
 	  cmd))
-	(otherwise
+	  (otherwise
 	 (error "exec returned an unexpected value ~a~&" wait-sig))))
       )
     )
   )
+
 
 (defun is-run (str)
   "inferior shell run: takes a string command, use this to make
