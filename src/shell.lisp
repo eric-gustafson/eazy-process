@@ -161,7 +161,7 @@ exit-status)"
 	  ((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
 	   (let ((out-str (fd-output-as-string p1 1))
 		 (err-str (fd-output-as-string p1 2)))
-	     (finalize-process p1)
+	     ;(finalize-process p1)
 	     (values out-str err-str exit-status cmd)))
 	  (otherwise
 	   (error "exec returned an unexpected value ~a~&" wait-sig))))
