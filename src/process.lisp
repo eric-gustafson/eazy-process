@@ -41,12 +41,12 @@
   "True finalizer of a process object. However,
 This function should not contain reference to the process itself
 because it prevents process object from GC-ing."
+  (map nil #'%close-fd-safely fds)
   (cond
     ((gethash pid *pid-wait-mark-table*)
      (remhash pid *pid-wait-mark-table*)
      )
     (t
-     (map nil #'%close-fd-safely fds)
      (handler-case			; in case pid does not exist
 	 (when (zerop (waitpid pid iolib.syscalls:WNOHANG))
            (warn "Killing ~a" pid)
