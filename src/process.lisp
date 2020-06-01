@@ -7,6 +7,19 @@
   (:documentation
    "A class representing a process."))
 
+(defvar *pid-wait-mark-table* (make-hash-table)
+  "Mark a pid if we waited for the process.  The finalizer can then
+  skip this step, and we don't get the warning on the trace-output."
+  )
+
+
+(defgeneric mark-process-wait (obj)
+  (:documentation "A mark that we have already successfully waited for
+   this process.")
+  (:method ((obj process))
+    (setf (gethash (pid obj) *pid-wait-mark-table*) t))
+  )
+  
 (defmethod print-object ((p process) s)
   (print-unreadable-object (p s :type t)
     (format s "PID: ~A" (pid p))))
@@ -28,19 +41,26 @@
   "True finalizer of a process object. However,
 This function should not contain reference to the process itself
 because it prevents process object from GC-ing."
-  (map nil #'%close-fd-safely fds)
-  (handler-case ; in case pid does not exist
-      (when (zerop (waitpid pid iolib.syscalls:WNOHANG))
-        (warn "Killing ~a" pid)
-        (kill pid sig)
-        (when (zerop (waitpid pid iolib.syscalls:WNOHANG))
-          (warn "Force killing ~a" pid)
-          (kill pid 9)
-          (waitpid pid 0)))
-    (iolib.syscalls:syscall-error (c)
-      (declare (ignore c))
-      (warn "Process ~a does not exist -- maybe already killed?" pid)
-      nil)))
+  (cond
+    ((gethash pid *pid-wait-mark-table*)
+     (remhash pid *pid-wait-mark-table*)
+     )
+    (t
+     (map nil #'%close-fd-safely fds)
+     (handler-case			; in case pid does not exist
+	 (when (zerop (waitpid pid iolib.syscalls:WNOHANG))
+           (warn "Killing ~a" pid)
+           (kill pid sig)
+           (when (zerop (waitpid pid iolib.syscalls:WNOHANG))
+             (warn "Force killing ~a" pid)
+             (kill pid 9)
+             (waitpid pid 0)))
+       (iolib.syscalls:syscall-error (c)
+	 (declare (ignore c))
+	 (warn "Process ~a does not exist -- maybe already killed?" pid)
+	 nil)))
+    )
+  )
 
 (defun %close-fd-safely (fd)
   (when fd
