@@ -155,6 +155,7 @@ exit-status)"
       (when *debug-exec*
 	(format *error-output* "waiting ...~%"))
       (let ((wait-sig (eazy-process:wait p1)))
+	(finalize-process p1)
 	(when *debug-exec* (format *error-output* "up!~%"))
 	(optima:match
 	    wait-sig
