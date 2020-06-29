@@ -155,22 +155,19 @@ exit-status)"
       (when *debug-exec*
 	(format *error-output* "waiting ...~%"))
       (let ((wait-sig (eazy-process:wait p1)))
-	(finalize-process p1)
 	(when *debug-exec* (format *error-output* "up!~%"))
 	(optima:match
 	    wait-sig
-	((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
-	 (values
-	  (fd-output-as-string p1 1)
-	  (fd-output-as-string p1 2)
-	  exit-status
-	  cmd))
+	  ((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
+	   (let ((out-str (fd-output-as-string p1 1))
+		 (err-str (fd-output-as-string p1 2)))
+	     (finalize-process p1)
+	     (values out-str err-str exit-status cmd)))
 	  (otherwise
-	 (error "exec returned an unexpected value ~a~&" wait-sig))))
+	   (error "exec returned an unexpected value ~a~&" wait-sig))))
       )
     )
   )
-
 
 (defun is-run (str)
   "inferior shell run: takes a string command, use this to make
