@@ -143,25 +143,22 @@ exit-status)"
 		      :for str :in csexp :do
 		     (if pre (princ pre out))
 		     (princ str out)))))
-    (when *debug-exec* (format *error-output* "~a:~a" csexp cmd))
     (let ((p1 (eazy-process:shell csexp)))
       (when input (fd-input-from-string p1 0 input))
-      (when *debug-exec* (format *error-output* "closing input fd~%"))
       ;;(setf (iolib.syscalls:fd-nonblock-p (eazy-process:fd p1 0)) t)
       #+nil(handler-case
 	  (iolib.syscalls:close (eazy-process:fd p1 0))
 	(isys:syscall-error (c)
 	  (format *error-output* "close error ~a~&" c)))
-      (when *debug-exec*
-	(format *error-output* "waiting ...~%"))
       (let ((wait-sig (eazy-process:wait p1)))
-	(when *debug-exec* (format *error-output* "up!~%"))
 	(optima:match
 	    wait-sig
 	  ((list exited? exit-status signalled? termsig coredump? stopped? stopsig continued? status)
 	   (let ((out-str (fd-output-as-string p1 1))
 		 (err-str (fd-output-as-string p1 2)))
 	     (mark-process-wait p1)
+	     (finalize-process p1)
+	     (tg:cancel-finalization p1)
 	     (values out-str err-str exit-status cmd)))
 	  (otherwise
 	   (error "exec returned an unexpected value ~a~&" wait-sig))))
