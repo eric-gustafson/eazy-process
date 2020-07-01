@@ -131,8 +131,6 @@ In the child process, the system call failure result in error status 203.
 FIXME: this might not be good.
 ")
 
-(defparameter *debug-exec* nil)
-
 (defun exec (csexp &key input)
   "runs a unix cmd (csexp), which is a sequence of strings using the eazy-process
 shell function.  This returns the values (output-str error-str
