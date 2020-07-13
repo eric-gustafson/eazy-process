@@ -11,13 +11,19 @@ subshell implemented with fork-execvp
 (defun shell (argv &optional
                      (fdspecs '#.+fdspecs-default+)
                      environments
-                     (search t))
+                     (search t)
+		     &key
+		     uid
+		     gid
+		     )
   (let ((fdspecs (mapcar #'canonicalize-fdspec fdspecs (iota (length fdspecs)))))
     (let ((pid (fork)))
       (cond
         ;; ((= -1 pid) ;; this is already handled by iolib, so don't care
         ;;  (%failure command))
         ((zerop pid)
+	 (when (numberp gid) (iolib/syscalls:setgid gid))
+	 (when (numberp uid) (iolib/syscalls:setuid uid))
          (%in-child fdspecs argv environments search))
         (t
          (%in-parent fdspecs pid))))))
@@ -131,7 +137,10 @@ In the child process, the system call failure result in error status 203.
 FIXME: this might not be good.
 ")
 
-(defun exec (csexp &key input)
+(defun exec (csexp &key
+		     input
+ 		     uid
+		     gid)
   "runs a unix cmd (csexp), which is a sequence of strings using the eazy-process
 shell function.  This returns the values (output-str error-str
 exit-status)"
@@ -141,7 +150,7 @@ exit-status)"
 		      :for str :in csexp :do
 		     (if pre (princ pre out))
 		     (princ str out)))))
-    (let ((p1 (eazy-process:shell csexp)))
+    (let ((p1 (eazy-process:shell csexp '#.+fdspecs-default+ nil t :uid uid :gid gid)))
       (when input (fd-input-from-string p1 0 input))
       ;;(setf (iolib.syscalls:fd-nonblock-p (eazy-process:fd p1 0)) t)
       #+nil(handler-case
