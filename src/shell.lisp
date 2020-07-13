@@ -8,14 +8,13 @@ subshell implemented with fork-execvp
 
 (in-package :eazy-process)
 
-(defun shell (argv &optional
-                     (fdspecs '#.+fdspecs-default+)
-                     environments
-                     (search t)
-		     &key
-		     uid
-		     gid
-		     )
+(defun shell2 (argv &key
+		      (fdspecs '#.+fdspecs-default+)
+		      environments
+		      (search t)
+		      uid
+		      gid
+		      )
   (let ((fdspecs (mapcar #'canonicalize-fdspec fdspecs (iota (length fdspecs)))))
     (let ((pid (fork)))
       (cond
@@ -24,6 +23,22 @@ subshell implemented with fork-execvp
         ((zerop pid)
 	 (when (numberp gid) (iolib/syscalls:setgid gid))
 	 (when (numberp uid) (iolib/syscalls:setuid uid))
+         (%in-child fdspecs argv environments search))
+        (t
+         (%in-parent fdspecs pid)))))
+  )
+
+(defun shell (argv &optional
+                     (fdspecs '#.+fdspecs-default+)
+                     environments
+		     (search t)
+		     )
+  (let ((fdspecs (mapcar #'canonicalize-fdspec fdspecs (iota (length fdspecs)))))
+    (let ((pid (fork)))
+      (cond
+        ;; ((= -1 pid) ;; this is already handled by iolib, so don't care
+        ;;  (%failure command))
+        ((zerop pid)
          (%in-child fdspecs argv environments search))
         (t
          (%in-parent fdspecs pid))))))
@@ -150,7 +165,7 @@ exit-status)"
 		      :for str :in csexp :do
 		     (if pre (princ pre out))
 		     (princ str out)))))
-    (let ((p1 (eazy-process:shell csexp '#.+fdspecs-default+ nil t :uid uid :gid gid)))
+    (let ((p1 (shell2 csexp :uid uid :gid gid)))
       (when input (fd-input-from-string p1 0 input))
       ;;(setf (iolib.syscalls:fd-nonblock-p (eazy-process:fd p1 0)) t)
       #+nil(handler-case
