@@ -11,7 +11,6 @@ subshell implemented with fork-execvp
 (defun shell2 (argv &key
 		      (fdspecs '#.+fdspecs-default+)
 		      environments
-		      (search t)
 		      uid
 		      gid
 		      )
@@ -23,7 +22,7 @@ subshell implemented with fork-execvp
         ((zerop pid)
 	 (when (numberp gid) (iolib/syscalls:setgid gid))
 	 (when (numberp uid) (iolib/syscalls:setuid uid))
-         (%in-child fdspecs argv environments search))
+         (%in-child fdspecs argv environments t))
         (t
          (%in-parent fdspecs pid)))))
   )
