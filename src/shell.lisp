@@ -70,8 +70,33 @@ subshell implemented with fork-execvp
              (declare (ignorable c))
              (foreign-funcall "_exit" :int 202))))
 
+;; Patch ffi-functions-unix.lisp
+(in-package :iolib/syscalls)
+(cl:defconstant sc-open-max 4)
+(export 'sc-open-max)
+
+(defsyscall (sysconf "sysconf") :int
+  "Get system configuration info"
+  (name :int))
+(export 'sysconf)  
+
+(in-package :eazy-process)	    
+
+(defvar *daemonize* nil
+  "Special variable to cause daemonization logic to engage between teh fork/exec"
+  )
+
+(export '*daemonize*)
+
+(defun daemonize-close-all-files! ()
+  (loop :for i :from 0 :upto (iolib.syscalls:sysconf osicat-posix:sc-open-max) :do
+    (iolib.syscalls:close i))
+  )
+
 (defun %exec (argv env search)
   (map nil #'%setenv env)
+  (when *daemonize*
+    (daemonize-close-all-files!))
   (if search
       (%execvp argv)
       (%execv argv)))
@@ -94,6 +119,8 @@ subshell implemented with fork-execvp
            (setf _argv (make-c-char* argv))
            (execvp (first argv) _argv)) ; does not return on success
       (when _argv (foreign-free _argv)))))
+
+
 
 (defun %execv (argv)
   (let (_argv)
