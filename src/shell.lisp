@@ -91,8 +91,13 @@ subshell implemented with fork-execvp
 (export '*daemonize*)
 
 (defun daemonize-close-all-files! ()
-  (loop :for i :from 0 :upto (iolib.syscalls::sysconf iolib.syscalls::sc-open-max) :do
-    (iolib.syscalls:close i))
+  (handler-case
+      (let ((n (iolib.syscalls::sysconf iolib.syscalls::sc-open-max)))
+	(loop :for i :from 0 :upto n :do
+	  (ignore-errors
+	   (iolib.syscalls:close i))))
+    (t (c)
+      (format *error-output* "~a~&" c)))
   )
 
 (defun %exec (argv env search)
