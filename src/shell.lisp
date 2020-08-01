@@ -102,7 +102,7 @@ subshell implemented with fork-execvp
 
 (defun %exec (argv env search)
   (map nil #'%setenv env)
-  (format *error-output* "shell.lisp: daemonize=~a~%" *daemonize*)
+  (alog (format nil "shell.lisp: daemonize=~a~%" *daemonize*))
   (when *daemonize*
     (daemonize-close-all-files!))
   (if search

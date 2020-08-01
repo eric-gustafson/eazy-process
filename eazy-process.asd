@@ -27,7 +27,9 @@
                         :iolib/syscalls
                         :trivial-garbage
                         :cl-ppcre
-                        :cl-rlimit)
+		:cl-rlimit
+		:cl-syslog
+		)
   :components ((:module :src
                 :serial t
                 :components
