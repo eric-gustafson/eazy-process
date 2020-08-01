@@ -72,12 +72,14 @@ subshell implemented with fork-execvp
 
 ;; Patch ffi-functions-unix.lisp
 (in-package :iolib/syscalls)
+
 (cl:defconstant sc-open-max 4)
 (export 'sc-open-max)
 
 (defsyscall (sysconf "sysconf") :int
   "Get system configuration info"
   (name :int))
+
 (export 'sysconf)  
 
 (in-package :eazy-process)	    
@@ -89,7 +91,7 @@ subshell implemented with fork-execvp
 (export '*daemonize*)
 
 (defun daemonize-close-all-files! ()
-  (loop :for i :from 0 :upto (iolib.syscalls:sysconf osicat-posix:sc-open-max) :do
+  (loop :for i :from 0 :upto (iolib.syscalls::sysconf iolib.syscalls::sc-open-max) :do
     (iolib.syscalls:close i))
   )
 
