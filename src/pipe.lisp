@@ -1,9 +1,6 @@
 
 (in-package :eazy-process)
 
-(defmethod alog ((str string))
-  (syslog:log "ezyprc" :user :warning str))
-
 (defstruct pipe
   (read 0 :type fixnum)
   (write 1 :type fixnum))

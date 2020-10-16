@@ -97,13 +97,13 @@ subshell implemented with fork-execvp
 	  (ignore-errors
 	   (iolib.syscalls:close i))))
     (t (c)
-      (alog (format nil "~a~&" c))))
+      (log4cl:log-error "~a~&" c)))
   )
 
 (defun %exec (argv env search)
   (map nil #'%setenv env)
   (when *daemonize*
-    (alog (format nil "shell.lisp: closing all file descriptors ~a~%" argv))
+    (log4cl:log-info "shell.lisp: closing all file descriptors ~a~%" argv)
     (daemonize-close-all-files!))
   (if search
       (%execvp argv)

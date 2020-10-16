@@ -28,7 +28,7 @@
                         :trivial-garbage
                         :cl-ppcre
 		:cl-rlimit
-		:cl-syslog
+		:log4cl
 		)
   :components ((:module :src
                 :serial t
